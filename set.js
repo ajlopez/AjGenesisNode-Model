@@ -12,7 +12,18 @@ module.exports = function (model, args, ajgenesis, cb) {
     if (fs.existsSync(filename))
         model = require(path.resolve(filename));
 
-    model[args[1]] = args[2];
+    var l = args.length;
+    
+    for (k = 1; k < args.length; k += 2) {
+        var name = args[k];
+        var value = args[k + 1];
+        var intvalue = asInteger(value);
+        
+        if (intvalue != null)
+            value = intvalue;
+        
+        model[name] = value;
+    }
     
     var text = JSON.stringify(model, null, 4);    
     fs.writeFileSync(filename, text);
@@ -20,3 +31,12 @@ module.exports = function (model, args, ajgenesis, cb) {
     cb();
 }
 
+function asInteger(value) {
+    value = value.trim();
+    
+    for (var n in value)
+        if (value[n] < '0' || value[n] > '9')
+            return null;
+            
+    return parseInt(value);
+}
