@@ -4,6 +4,31 @@ var settask = require('../set'),
     fs = require('fs'),
     ajgenesis = require('ajgenesis');
     
+exports['set empty project'] = function (test) {
+    test.async();
+    
+    var cwd = process.cwd();
+    removeDirSync(path.join(__dirname, 'models'));
+    
+    process.chdir('test');
+    
+    settask(null, ['project0'], ajgenesis, function (err) {
+        if (err)
+            throw err;
+            
+        var model = ajgenesis.loadModel(path.join(__dirname, 'models', 'project0.json'));
+        
+        test.ok(model);
+        test.ok(model.project0);
+        
+        removeDirSync(path.join(__dirname, 'models'));
+            
+        test.done();
+    });
+    
+    process.chdir(cwd);
+}
+    
 exports['set project title'] = function (test) {
     test.async();
     
