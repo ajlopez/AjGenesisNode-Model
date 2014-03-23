@@ -8,6 +8,7 @@ module.exports = function (model, args, ajgenesis, cb) {
     ajgenesis.createDirectory('models');
     var filename = path.join('models', entityname + '.json');
     var model = { };
+    model[entityname] = { };
 
     if (fs.existsSync(filename))
         model = require(path.resolve(filename));
@@ -22,7 +23,7 @@ module.exports = function (model, args, ajgenesis, cb) {
         if (intvalue != null)
             value = intvalue;
         
-        model[name] = value;
+        model[entityname][name] = value;
     }
     
     var text = JSON.stringify(model, null, 4);    
