@@ -18,12 +18,22 @@ module.exports = function (model, args, ajgenesis, cb) {
     for (k = 1; k < args.length; k++) {
         var pair = args[k];
         var pos = pair.indexOf('=');
-        var name = pair.substring(0, pos).trim();
-        var value = pair.substring(pos + 1).trim();        
-        var intvalue = asInteger(value);
+        var name;
+        var value;
         
-        if (intvalue != null)
-            value = intvalue;
+        if (pos >= 0) {
+            name = pair.substring(0, pos).trim();
+            value = pair.substring(pos + 1).trim();        
+            var intvalue = asInteger(value);
+            
+            if (intvalue != null)
+                value = intvalue;
+        }
+        else {
+            name = pair;
+            value = true;
+        }
+        
             
         if (value === 'true')
             value = true;

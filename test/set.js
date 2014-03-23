@@ -178,6 +178,32 @@ exports['set required and autocomplete as booleans'] = function (test) {
     process.chdir(cwd);
 }
 
+exports['set required as boolean flag'] = function (test) {
+    test.async();
+    
+    var cwd = process.cwd();
+    removeDirSync(path.join(__dirname, 'models'));
+    
+    process.chdir('test');
+    
+    settask(null, ['entity2', 'required'], ajgenesis, function (err) {
+        if (err)
+            throw err;
+            
+        var model = ajgenesis.loadModel(path.join(__dirname, 'models', 'entity2.json'));
+
+        test.ok(model);
+        test.ok(model.entity2);
+        test.strictEqual(model.entity2.required, true);
+        
+        removeDirSync(path.join(__dirname, 'models'));
+            
+        test.done();
+    });
+    
+    process.chdir(cwd);
+}
+
 function removeDirSync(dirname) {
     if (!fs.existsSync(dirname))
         return;
