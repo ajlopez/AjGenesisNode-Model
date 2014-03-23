@@ -94,7 +94,7 @@ npm test
 
 ## Versions
 
-[TBD]
+- 0.0.1: Published, with set and remove tasks, initial implementation
 
 ## Contribution
 
