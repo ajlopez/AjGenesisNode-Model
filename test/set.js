@@ -37,7 +37,7 @@ exports['set project title'] = function (test) {
     
     process.chdir('test');
     
-    settask(null, ['project1', 'title', 'My Project'], ajgenesis, function (err) {
+    settask(null, ['project1', 'title=My Project'], ajgenesis, function (err) {
         if (err)
             throw err;
             
@@ -64,7 +64,7 @@ exports['set project version as integer'] = function (test) {
     
     process.chdir('test');
     
-    settask(null, ['project2', 'version', '1'], ajgenesis, function (err) {
+    settask(null, ['project2', 'version=1'], ajgenesis, function (err) {
         if (err)
             throw err;
             
@@ -91,7 +91,7 @@ exports['set project properties'] = function (test) {
     
     process.chdir('test');
     
-    settask(null, ['project3', 'name', 'myproject', 'title', 'My Project', 'version', '0.0.1'], ajgenesis, function (err) {
+    settask(null, ['project3', 'name=myproject', 'title=My Project', 'version=0.0.1'], ajgenesis, function (err) {
         if (err)
             throw err;
             
@@ -126,7 +126,7 @@ exports['set project properties preserving existing ones'] = function (test) {
     
     fs.writeFileSync(filename, '{ "project4": {  "original": "one" } }');
     
-    settask(null, ['project4', 'name', 'myproject', 'title', 'My Project', 'version', '0.0.1'], ajgenesis, function (err) {
+    settask(null, ['project4', 'name=myproject', 'title=My Project', 'version=0.0.1'], ajgenesis, function (err) {
         if (err)
             throw err;
                                     
@@ -142,6 +142,33 @@ exports['set project properties preserving existing ones'] = function (test) {
         test.equal(model.project4.version, '0.0.1');
         test.ok(model.project4.original);
         test.equal(model.project4.original, 'one');
+        
+        removeDirSync(path.join(__dirname, 'models'));
+            
+        test.done();
+    });
+    
+    process.chdir(cwd);
+}
+
+exports['set required and autocomplete as booleans'] = function (test) {
+    test.async();
+    
+    var cwd = process.cwd();
+    removeDirSync(path.join(__dirname, 'models'));
+    
+    process.chdir('test');
+    
+    settask(null, ['entity1', 'required=true', 'autocomplete=false'], ajgenesis, function (err) {
+        if (err)
+            throw err;
+            
+        var model = ajgenesis.loadModel(path.join(__dirname, 'models', 'entity1.json'));
+
+        test.ok(model);
+        test.ok(model.entity1);
+        test.strictEqual(model.entity1.required, true);
+        test.strictEqual(model.entity1.autocomplete, false);
         
         removeDirSync(path.join(__dirname, 'models'));
             

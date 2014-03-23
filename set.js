@@ -15,13 +15,20 @@ module.exports = function (model, args, ajgenesis, cb) {
 
     var l = args.length;
     
-    for (k = 1; k < args.length; k += 2) {
-        var name = args[k];
-        var value = args[k + 1];
+    for (k = 1; k < args.length; k++) {
+        var pair = args[k];
+        var pos = pair.indexOf('=');
+        var name = pair.substring(0, pos).trim();
+        var value = pair.substring(pos + 1).trim();        
         var intvalue = asInteger(value);
         
         if (intvalue != null)
             value = intvalue;
+            
+        if (value === 'true')
+            value = true;
+        if (value === 'false')
+            value = false;
         
         model[entityname][name] = value;
     }
