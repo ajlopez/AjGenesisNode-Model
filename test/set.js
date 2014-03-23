@@ -2,13 +2,14 @@
 var settask = require('../set'),
     path = require('path'),
     fs = require('fs'),
-    ajgenesis = require('ajgenesis');
+    ajgenesis = require('ajgenesis'),
+    fsutils = require('./lib/fsutils');
     
 exports['set empty project'] = function (test) {
     test.async();
     
     var cwd = process.cwd();
-    removeDirSync(path.join(__dirname, 'models'));
+    fsutils.removeDirSync(path.join(__dirname, 'models'));
     
     process.chdir('test');
     
@@ -21,7 +22,7 @@ exports['set empty project'] = function (test) {
         test.ok(model);
         test.ok(model.project0);
         
-        removeDirSync(path.join(__dirname, 'models'));
+        fsutils.removeDirSync(path.join(__dirname, 'models'));
             
         test.done();
     });
@@ -33,7 +34,7 @@ exports['set project title'] = function (test) {
     test.async();
     
     var cwd = process.cwd();
-    removeDirSync(path.join(__dirname, 'models'));
+    fsutils.removeDirSync(path.join(__dirname, 'models'));
     
     process.chdir('test');
     
@@ -48,7 +49,7 @@ exports['set project title'] = function (test) {
         test.ok(model.project1.title);
         test.equal(model.project1.title, 'My Project');
         
-        removeDirSync(path.join(__dirname, 'models'));
+        fsutils.removeDirSync(path.join(__dirname, 'models'));
             
         test.done();
     });
@@ -60,7 +61,7 @@ exports['set project version as integer'] = function (test) {
     test.async();
     
     var cwd = process.cwd();
-    removeDirSync(path.join(__dirname, 'models'));
+    fsutils.removeDirSync(path.join(__dirname, 'models'));
     
     process.chdir('test');
     
@@ -75,7 +76,7 @@ exports['set project version as integer'] = function (test) {
         test.ok(model.project2.version);
         test.strictEqual(model.project2.version, 1);
         
-        removeDirSync(path.join(__dirname, 'models'));
+        fsutils.removeDirSync(path.join(__dirname, 'models'));
             
         test.done();
     });
@@ -87,7 +88,7 @@ exports['set project properties'] = function (test) {
     test.async();
     
     var cwd = process.cwd();
-    removeDirSync(path.join(__dirname, 'models'));
+    fsutils.removeDirSync(path.join(__dirname, 'models'));
     
     process.chdir('test');
     
@@ -106,7 +107,7 @@ exports['set project properties'] = function (test) {
         test.ok(model.project3.version);
         test.equal(model.project3.version, '0.0.1');
         
-        removeDirSync(path.join(__dirname, 'models'));
+        fsutils.removeDirSync(path.join(__dirname, 'models'));
             
         test.done();
     });
@@ -118,7 +119,7 @@ exports['set project properties preserving existing ones'] = function (test) {
     test.async();
     
     var cwd = process.cwd();
-    removeDirSync(path.join(__dirname, 'models'));
+    fsutils.removeDirSync(path.join(__dirname, 'models'));
     
     process.chdir('test');
     ajgenesis.createDirectory('models');
@@ -143,7 +144,7 @@ exports['set project properties preserving existing ones'] = function (test) {
         test.ok(model.project4.original);
         test.equal(model.project4.original, 'one');
         
-        removeDirSync(path.join(__dirname, 'models'));
+        fsutils.removeDirSync(path.join(__dirname, 'models'));
             
         test.done();
     });
@@ -155,7 +156,7 @@ exports['set required and autocomplete as booleans'] = function (test) {
     test.async();
     
     var cwd = process.cwd();
-    removeDirSync(path.join(__dirname, 'models'));
+    fsutils.removeDirSync(path.join(__dirname, 'models'));
     
     process.chdir('test');
     
@@ -170,7 +171,7 @@ exports['set required and autocomplete as booleans'] = function (test) {
         test.strictEqual(model.entity1.required, true);
         test.strictEqual(model.entity1.autocomplete, false);
         
-        removeDirSync(path.join(__dirname, 'models'));
+        fsutils.removeDirSync(path.join(__dirname, 'models'));
             
         test.done();
     });
@@ -182,7 +183,7 @@ exports['set required as boolean flag'] = function (test) {
     test.async();
     
     var cwd = process.cwd();
-    removeDirSync(path.join(__dirname, 'models'));
+    fsutils.removeDirSync(path.join(__dirname, 'models'));
     
     process.chdir('test');
     
@@ -196,44 +197,10 @@ exports['set required as boolean flag'] = function (test) {
         test.ok(model.entity2);
         test.strictEqual(model.entity2.required, true);
         
-        removeDirSync(path.join(__dirname, 'models'));
+        fsutils.removeDirSync(path.join(__dirname, 'models'));
             
         test.done();
     });
     
     process.chdir(cwd);
-}
-
-function removeDirSync(dirname) {
-    if (!fs.existsSync(dirname))
-        return;
-        
-    var filenames = fs.readdirSync(dirname);
-    
-    filenames.forEach(function (filename) {
-        filename = path.join(dirname, filename);
-        
-        if (isDirectory(filename))
-            removeDirSync(filename);
-        else
-            removeFileSync(filename);
-    });
-    
-    fs.rmdirSync(dirname);
-}
-
-function removeFileSync(filename) {
-    fs.unlinkSync(filename);
-}
-
-function isDirectory(filename)
-{
-    try {
-        var stats = fs.lstatSync(filename);
-        return stats.isDirectory();
-    }
-    catch (err)
-    {
-        return false;
-    }
 }

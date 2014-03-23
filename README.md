@@ -17,17 +17,69 @@ or you can use AjGenesisNode Model tasks.
 
 To set a property in the model
 ```
-ajgenesis model:set project title 'My Project'
+ajgenesis model:set project title="My Project"
 ```
-> Use double quotes `"My Project"` in Windows
+> To be reviewed if in *nix shell you should use `"title=My Project"` instead of `title="My Project"`
 
 It modified or add a `models/project.json` file with a property `title` with string value `My Project`.
 
 ```json
 {
-    "title": "My Project",
-    .... other properties
+    "project": {
+        "title": "My Project",
+        // ... other preexisting properties
+    }
 }
+```
+
+Set many properties in one command
+```
+ajgenesis model:set project title="My Project" description="My pet project"
+```
+
+Set an empty object
+```
+ajgenesis model:set project
+```
+
+Result
+```json
+{
+    "project": {
+    }
+}
+```
+
+Set a boolean flag
+```
+ajgenesis model:set project usemongodb
+```
+
+Result
+```json
+{
+    "project": {
+        "usemongodb": true
+    }
+}
+```
+
+Set integers, booleans
+```
+ajgenesis model:set project usemongodb=true useangular=false port=3000
+```
+
+Result
+```json
+{
+    "project": {
+        "usemongodb": true,
+        "useangular": false,
+        "port": 3000
+    }
+}
+```
+
 
 ## Development
 
