@@ -5,11 +5,14 @@ var settask = require('../set'),
     ajgenesis = require('ajgenesis'),
     fsutils = require('./lib/fsutils');
     
+var ajgenesisdir = path.join(__dirname, 'ajgenesis');
+var modeldir = path.join(__dirname, 'ajgenesis', 'models');
+    
 exports['set empty project'] = function (test) {
     test.async();
     
     var cwd = process.cwd();
-    fsutils.removeDirSync(path.join(__dirname, 'ajgenesis'));
+    fsutils.removeDirSync(ajgenesisdir);
     
     process.chdir('test');
     
@@ -22,7 +25,7 @@ exports['set empty project'] = function (test) {
         test.ok(model);
         test.ok(model.project0);
         
-        fsutils.removeDirSync(path.join(__dirname, 'ajgenesis', 'models'));
+        fsutils.removeDirSync(ajgenesisdir);
             
         test.done();
     });
@@ -34,7 +37,7 @@ exports['set project title'] = function (test) {
     test.async();
     
     var cwd = process.cwd();
-    fsutils.removeDirSync(path.join(__dirname, 'ajgenesis', 'models'));
+    fsutils.removeDirSync(ajgenesisdir);
     
     process.chdir('test');
     
@@ -42,14 +45,14 @@ exports['set project title'] = function (test) {
         if (err)
             throw err;
             
-        var model = ajgenesis.loadModel(path.join(__dirname, 'ajgenesis', 'models', 'project1.json'));
+        var model = ajgenesis.loadModel(path.join(modeldir, 'project1.json'));
         
         test.ok(model);
         test.ok(model.project1);
         test.ok(model.project1.title);
         test.equal(model.project1.title, 'My Project');
         
-        fsutils.removeDirSync(path.join(__dirname, 'models'));
+        fsutils.removeDirSync(ajgenesisdir);
             
         test.done();
     });
@@ -61,7 +64,7 @@ exports['set project version as integer'] = function (test) {
     test.async();
     
     var cwd = process.cwd();
-    fsutils.removeDirSync(path.join(__dirname, 'ajgenesis', 'models'));
+    fsutils.removeDirSync(ajgenesisdir);
     
     process.chdir('test');
     
@@ -69,7 +72,7 @@ exports['set project version as integer'] = function (test) {
         if (err)
             throw err;
             
-        var model = ajgenesis.loadModel(path.join(__dirname, 'ajgenesis', 'models', 'project2.json'));
+        var model = loadModel('project2');
 
         test.ok(model);
         test.ok(model.project2);
@@ -119,11 +122,11 @@ exports['set project properties preserving existing ones'] = function (test) {
     test.async();
     
     var cwd = process.cwd();
-    fsutils.removeDirSync(path.join(__dirname, 'ajgenesis', 'models'));
+    fsutils.removeDirSync(ajgenesisdir);
     
     process.chdir('test');
     ajgenesis.createDirectory('ajgenesis', 'models');
-    var filename = path.join(__dirname, 'ajgenesis', 'models', 'project4.json');
+    var filename = path.join(modeldir, 'project4.json');
     
     fs.writeFileSync(filename, '{ "project4": {  "original": "one" } }');
     
@@ -156,7 +159,7 @@ exports['set required and autocomplete as booleans'] = function (test) {
     test.async();
     
     var cwd = process.cwd();
-    fsutils.removeDirSync(path.join(__dirname, 'ajgenesis', 'models'));
+    fsutils.removeDirSync(ajgenesisdir);
     
     process.chdir('test');
     
@@ -164,14 +167,14 @@ exports['set required and autocomplete as booleans'] = function (test) {
         if (err)
             throw err;
             
-        var model = ajgenesis.loadModel(path.join(__dirname, 'ajgenesis', 'models', 'entity1.json'));
+        var model = ajgenesis.loadModel('entity1');
 
         test.ok(model);
         test.ok(model.entity1);
         test.strictEqual(model.entity1.required, true);
         test.strictEqual(model.entity1.autocomplete, false);
         
-        fsutils.removeDirSync(path.join(__dirname, 'models'));
+        fsutils.removeDirSync(ajgenesisdir);
             
         test.done();
     });
@@ -183,7 +186,7 @@ exports['set required as boolean flag'] = function (test) {
     test.async();
     
     var cwd = process.cwd();
-    fsutils.removeDirSync(path.join(__dirname, 'ajgenesis', 'models'));
+    fsutils.removeDirSync(ajgenesisdir);
     
     process.chdir('test');
     
@@ -191,13 +194,13 @@ exports['set required as boolean flag'] = function (test) {
         if (err)
             throw err;
             
-        var model = ajgenesis.loadModel(path.join(__dirname, 'ajgenesis', 'models', 'entity2.json'));
+        var model = ajgenesis.loadModel('entity2');
 
         test.ok(model);
         test.ok(model.entity2);
         test.strictEqual(model.entity2.required, true);
         
-        fsutils.removeDirSync(path.join(__dirname, 'models'));
+        fsutils.removeDirSync(ajgenesisdir);
             
         test.done();
     });
@@ -206,7 +209,7 @@ exports['set required as boolean flag'] = function (test) {
 }
 
 function loadModel(name) {
-    var filename = path.join(__dirname, 'ajgenesis', 'models', name + '.json');
+    var filename = path.join(modeldir, name + '.json');
     var content = fs.readFileSync(filename).toString();
     
     var model;
@@ -215,3 +218,4 @@ function loadModel(name) {
     
     return model;
 }
+
