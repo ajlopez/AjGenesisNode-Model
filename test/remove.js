@@ -4,16 +4,19 @@ var removetask = require('../remove'),
     fs = require('fs'),
     ajgenesis = require('ajgenesis'),
     fsutils = require('./lib/fsutils');
+
+var ajgenesisdir = path.join(__dirname, 'ajgenesis');
+var modeldir = path.join(__dirname, 'ajgenesis', 'models');
     
 exports['remove model'] = function (test) {
     test.async();
     
     var cwd = process.cwd();
-    fsutils.removeDirSync(path.join(__dirname, 'models'));
+    fsutils.removeDirSync(ajgenesisdir);
     process.chdir('test');
-    ajgenesis.createDirectory('models');
+    ajgenesis.createDirectory('ajgenesis', 'models');
     
-    var filename = path.resolve(path.join(__dirname, 'models', 'model1.json'));
+    var filename = path.resolve(path.join(modeldir, 'model1.json'));
     fs.writeFileSync(filename, '{ "model1": true }');
     
     removetask(null, ['model1'], ajgenesis, function (err) {
@@ -21,7 +24,7 @@ exports['remove model'] = function (test) {
             throw err;
         
         test.ok(!fs.existsSync(filename));
-        fsutils.removeDirSync(path.join(__dirname, 'models'));
+        fsutils.removeDirSync(ajgenesisdir);
             
         test.done();
     });
@@ -33,11 +36,11 @@ exports['remove model property'] = function (test) {
     test.async();
     
     var cwd = process.cwd();
-    fsutils.removeDirSync(path.join(__dirname, 'models'));
+    fsutils.removeDirSync(ajgenesisdir);
     process.chdir('test');
-    ajgenesis.createDirectory('models');
+    ajgenesis.createDirectory('ajgenesis', 'models');
     
-    var filename = path.resolve(path.join(__dirname, 'models', 'model2.json'));
+    var filename = path.resolve(path.join(modeldir, 'model2.json'));
     fs.writeFileSync(filename, '{ "model2": { "name": "myproject", "title": "My Project" } }');
     
     removetask(null, ['model2', 'title'], ajgenesis, function (err) {
@@ -66,11 +69,11 @@ exports['remove model properties'] = function (test) {
     test.async();
     
     var cwd = process.cwd();
-    fsutils.removeDirSync(path.join(__dirname, 'models'));
+    fsutils.removeDirSync(ajgenesisdir);
     process.chdir('test');
-    ajgenesis.createDirectory('models');
+    ajgenesis.createDirectory('ajgenesis', 'models');
     
-    var filename = path.resolve(path.join(__dirname, 'models', 'model3.json'));
+    var filename = path.resolve(path.join(modeldir, 'model3.json'));
     fs.writeFileSync(filename, '{ "model3": { "name": "myproject", "title": "My Project", "notes": "My notes" } }');
     
     removetask(null, ['model3', 'title', 'notes'], ajgenesis, function (err) {

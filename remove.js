@@ -5,7 +5,7 @@ var path = require('path'),
 module.exports = function (model, args, ajgenesis, cb) {
     var entityname = args[0];
     
-    var filename = path.join('models', entityname + '.json');
+    var filename = path.join('ajgenesis', 'models', entityname + '.json');
     var model = { };
     model[entityname] = { };
 
