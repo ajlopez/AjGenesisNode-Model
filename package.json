@@ -1,7 +1,7 @@
 { "name": "ajgenesisnode-model"
 , "description": "AjGenesis for Node, Model tasks and templates"
 , "keywords": [ "codegeneration", "nodejs", "ajgenesis", "model" ]
-, "version": "0.0.1"
+, "version": "0.0.2"
 , "author": "Angel 'Java' Lopez <webmaster@ajlopez.com> (http://www.ajlopez.com)"
 , "repository": { "type": "git", "url": "git://github.com/ajlopez/AjGenesisNode-Model.git" }
 , "main": "./index.js"

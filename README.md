@@ -1,6 +1,6 @@
 # AjGenesisNode Model
 
-AjGenesisNode Model tasks and templates. WIP.
+AjGenesisNode Model tasks and templates
 
 ## Installation
 
@@ -95,6 +95,7 @@ npm test
 ## Versions
 
 - 0.0.1: Published, with set and remove tasks, initial implementation
+- 0.0.2: Published, use `ajgenesis/models`
 
 ## Contribution
 
