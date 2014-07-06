@@ -5,7 +5,7 @@ var path = require('path'),
 module.exports = function (model, args, ajgenesis, cb) {
     var entityname = args[0];
     
-    ajgenesis.createDirectory('ajgenesis', 'models');
+    ajgenesis.createModelDirectory();
     
     model = ajgenesis.loadModel(entityname);
     

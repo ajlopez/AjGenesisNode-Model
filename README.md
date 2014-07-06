@@ -96,6 +96,7 @@ npm test
 
 - 0.0.1: Published, with set and remove tasks, initial implementation
 - 0.0.2: Published, use `ajgenesis/models`
+- 0.0.3: Published, use createModelDirectory, getModelDirectory
 
 ## Contribution
 
