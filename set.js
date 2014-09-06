@@ -49,10 +49,11 @@ module.exports = function (model, args, ajgenesis, cb) {
 
 function asInteger(value) {
     value = value.trim();
+    var l = value.length;
     
-    for (var n in value)
+    for (var n = 0; n < l; n++)
         if (value[n] < '0' || value[n] > '9')
             return null;
-            
+    
     return parseInt(value);
 }
