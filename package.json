@@ -10,8 +10,9 @@
     "test": "simpleunit ./test"
   }
 , "dependencies": {
+    "simpleasync": "0.0.5"
   }
 , "devDependencies": {
-    "simpleunit": "0.0.5"
+    "simpleunit": "0.0.6"
   }
 }
