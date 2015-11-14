@@ -9,9 +9,6 @@ module.exports = function (model, args, ajgenesis, cb) {
     
     model = ajgenesis.loadModel(entityname);
     
-    if (!model[entityname])
-        model[entityname] = { };
-
     var l = args.length;
     
     for (k = 1; k < args.length; k++) {
@@ -32,14 +29,13 @@ module.exports = function (model, args, ajgenesis, cb) {
             name = pair;
             value = true;
         }
-        
-            
+                    
         if (value === 'true')
             value = true;
         if (value === 'false')
             value = false;
         
-        model[entityname][name] = value;
+        model[name] = value;
     }
 
     ajgenesis.saveModel(entityname, model);

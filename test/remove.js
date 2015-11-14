@@ -41,7 +41,7 @@ exports['remove model property'] = function (test) {
     ajgenesis.createDirectory('ajgenesis', 'models');
     
     var filename = path.resolve(path.join(modeldir, 'model2.json'));
-    fs.writeFileSync(filename, '{ "model2": { "name": "myproject", "title": "My Project" } }');
+    fs.writeFileSync(filename, '{ "name": "myproject", "title": "My Project" }');
     
     removetask(null, ['model2', 'title'], ajgenesis, function (err) {
         if (err)
@@ -52,10 +52,9 @@ exports['remove model property'] = function (test) {
         eval("var model = " + text);
         
         test.ok(model);
-        test.ok(model.model2);
-        test.ok(model.model2.name);
-        test.equal(model.model2.name, "myproject");
-        test.strictEqual(model.model2.title, undefined);
+        test.ok(model.name);
+        test.equal(model.name, "myproject");
+        test.strictEqual(model.title, undefined);
         
         fsutils.removeDirSync(path.join(__dirname, 'models'));
             
@@ -74,7 +73,7 @@ exports['remove model properties'] = function (test) {
     ajgenesis.createDirectory('ajgenesis', 'models');
     
     var filename = path.resolve(path.join(modeldir, 'model3.json'));
-    fs.writeFileSync(filename, '{ "model3": { "name": "myproject", "title": "My Project", "notes": "My notes" } }');
+    fs.writeFileSync(filename, '{ "name": "myproject", "title": "My Project", "notes": "My notes" }');
     
     removetask(null, ['model3', 'title', 'notes'], ajgenesis, function (err) {
         if (err)
@@ -85,11 +84,9 @@ exports['remove model properties'] = function (test) {
         eval("var model = " + text);
         
         test.ok(model);
-        test.ok(model.model3);
-        test.ok(model.model3.name);
-        test.equal(model.model3.name, "myproject");
-        test.strictEqual(model.model3.title, undefined);
-        test.strictEqual(model.model3.notes, undefined);
+        test.equal(model.name, "myproject");
+        test.strictEqual(model.title, undefined);
+        test.strictEqual(model.notes, undefined);
         
         fsutils.removeDirSync(path.join(__dirname, 'models'));
             

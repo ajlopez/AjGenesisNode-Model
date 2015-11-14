@@ -7,7 +7,6 @@ module.exports = function (model, args, ajgenesis, cb) {
     
     var filename = path.join(ajgenesis.getModelDirectory(), entityname + '.json');
     var model = { };
-    model[entityname] = { };
 
     if (!fs.existsSync(filename)) {
         cb('file does not exists');
@@ -27,7 +26,7 @@ module.exports = function (model, args, ajgenesis, cb) {
     for (k = 1; k < args.length; k++) {
         var name = args[k];
         
-        delete model[entityname][name];
+        delete model[name];
     }
     
     var text = JSON.stringify(model, null, 4);    
