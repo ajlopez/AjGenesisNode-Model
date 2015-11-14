@@ -98,6 +98,7 @@ npm test
 - 0.0.2: Published, use `ajgenesis/models`
 - 0.0.3: Published, use createModelDirectory, getModelDirectory
 - 0.0.4: Published, install method
+- 0.0.5: Published, using new model structure in files
 
 ## Contribution
 
