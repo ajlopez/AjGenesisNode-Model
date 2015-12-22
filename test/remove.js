@@ -14,7 +14,7 @@ exports['remove model'] = function (test) {
     var cwd = process.cwd();
     fsutils.removeDirSync(ajgenesisdir);
     process.chdir('test');
-    ajgenesis.createDirectory('ajgenesis', 'models');
+    ajgenesis.fs.createDirectory('ajgenesis', 'models');
     
     var filename = path.resolve(path.join(modeldir, 'model1.json'));
     fs.writeFileSync(filename, '{ "model1": true }');
@@ -38,7 +38,7 @@ exports['remove model property'] = function (test) {
     var cwd = process.cwd();
     fsutils.removeDirSync(ajgenesisdir);
     process.chdir('test');
-    ajgenesis.createDirectory('ajgenesis', 'models');
+    ajgenesis.fs.createDirectory('ajgenesis', 'models');
     
     var filename = path.resolve(path.join(modeldir, 'model2.json'));
     fs.writeFileSync(filename, '{ "name": "myproject", "title": "My Project" }');
@@ -70,7 +70,7 @@ exports['remove model properties'] = function (test) {
     var cwd = process.cwd();
     fsutils.removeDirSync(ajgenesisdir);
     process.chdir('test');
-    ajgenesis.createDirectory('ajgenesis', 'models');
+    ajgenesis.fs.createDirectory('ajgenesis', 'models');
     
     var filename = path.resolve(path.join(modeldir, 'model3.json'));
     fs.writeFileSync(filename, '{ "name": "myproject", "title": "My Project", "notes": "My notes" }');

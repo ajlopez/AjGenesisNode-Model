@@ -124,7 +124,7 @@ exports['set project properties preserving existing ones'] = function (test) {
     fsutils.removeDirSync(ajgenesisdir);
     
     process.chdir('test');
-    ajgenesis.createDirectory('ajgenesis', 'models');
+    ajgenesis.fs.createDirectory('ajgenesis', 'models');
     var filename = path.join(modeldir, 'project4.json');
     
     fs.writeFileSync(filename, '{ "original": "one" }');
