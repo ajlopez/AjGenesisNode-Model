@@ -1,5 +1,5 @@
 
-var settask = require('../set'),
+var settask = require('../ajgenesis/modules/model/set'),
     path = require('path'),
     fs = require('fs'),
     ajgenesis = require('ajgenesis'),

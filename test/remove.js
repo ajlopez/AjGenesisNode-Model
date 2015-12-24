@@ -1,5 +1,5 @@
 
-var removetask = require('../remove'),
+var removetask = require('../ajgenesis/modules/model/remove'),
     path = require('path'),
     fs = require('fs'),
     ajgenesis = require('ajgenesis'),
