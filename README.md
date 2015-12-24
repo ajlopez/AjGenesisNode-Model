@@ -99,6 +99,7 @@ npm test
 - 0.0.3: Published, use createModelDirectory, getModelDirectory
 - 0.0.4: Published, install method
 - 0.0.5: Published, using new model structure in files
+- 0.0.6: Published, new directory struct, pre-installed in [AjGenesisNode-Express](https://github.com/ajlopez/AjGenesisNode-Express)
 
 ## Contribution
 
